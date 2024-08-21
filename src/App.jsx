@@ -19,7 +19,7 @@ export const UserContext = createContext("");
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [user, setUser] = useState({});
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState(localStorage.getItem("theme") ? localStorage.getItem("theme") : "light");
 
   useEffect(() => {
     if (localStorage.getItem("user")) {
@@ -28,7 +28,7 @@ function App() {
     
     if (localStorage.getItem("theme")) {
       setTheme(localStorage.getItem("theme"));
-      document.querySelector("html").setAttribute("data-theme", theme);
+      document.querySelector("html").setAttribute("data-theme", localStorage.getItem("theme"));
     }else{
       document.querySelector("html").setAttribute("data-theme", theme);
     }
