@@ -1,11 +1,11 @@
 import React from 'react'
 
-function Register() {
+function ErrorPage() {
   return (
     <div>
-      Register
+      ErrorPage
     </div>
   )
 }
 
-export default Register
+export default ErrorPage;

@@ -1,9 +1,13 @@
 import React from 'react'
+import Header from '../components/Header'
 
-function MainLayout() {
+function MainLayout({children, theme}) {
+ 
+  
   return (
     <div>
-      MainLayout
+      <Header theme={theme}></Header>
+      {children}
     </div>
   )
 }
