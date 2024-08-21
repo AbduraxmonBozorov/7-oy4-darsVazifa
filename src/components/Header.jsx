@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
-import { TokenContext, UserContext } from "../App";
+import { ThemeContext, TokenContext, UserContext } from "../App";
 import { Link, NavLink } from "react-router-dom";
-function Header({ theme }) {
+
+function Header() {
   const token = useContext(TokenContext);
   const user = useContext(UserContext);
+  const theme=useContext(ThemeContext);
 
   function handleTheme(event) {
     if (event.target.checked == true) {
