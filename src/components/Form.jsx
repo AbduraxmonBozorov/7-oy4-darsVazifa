@@ -3,17 +3,24 @@ import React, { useRef, useState } from "react";
 function Form() {
   const searchRef = useRef(null);
   const categoryRef = useRef("all");
-  const companyRef = useRef(null);
+  const companyRef = useRef('all');
   const sortRef = useRef(null);
+  const [shipping, setShipping] = useState(false);
+  
 
   const [price, setPrice] = useState(1000);
-  console.log(price);
-  
-  
+
+  function handleSearch(event){
+    event.preventDefault();
+
+  }
+
+  function handleReset(event){
+  }
 
   return (
     <div className="py-20">
-      <form className="bg-base-200 rounded-md px-8 py-4 grid gap-x-4 gap-y-8 sm:gid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center border">
+      <form className="bg-base-200 rounded-md px-8 py-4 grid gap-x-4 gap-y-8 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center border">
         <div className="form-control ">
           <label htmlFor="search" className="label-text capitalize mb-3">
             Search Products
@@ -88,10 +95,10 @@ function Form() {
             <p>${price}.00</p>
           </div>
           <input
-          onChange={(event)=>{
-            event.preventDefault();
-            setPrice(event.target.value)
-          }}
+            onChange={(event) => {
+              event.preventDefault();
+              setPrice(event.target.value);
+            }}
             value={price}
             className="range range-primary range-sm"
             type="range"
@@ -110,19 +117,19 @@ function Form() {
           <label className="cursor-pointer label flex flex-col">
             <span className="label-text mb-3">Free Shipping</span>
             <input
+                onChange={()=>{setShipping(!shipping)}}
               type="checkbox"
-              defaultChecked
               className="checkbox checkbox-info"
             />
           </label>
         </div>
 
         <div className="form-control">
-          <button className="btn btn-info btn-sm text-white">SEARCH</button>
+          <button onClick={handleSearch} className="btn btn-info btn-sm text-white">SEARCH</button>
         </div>
 
         <div className="form-control">
-          <button className="btn bg-pink-600 btn-sm text-white uppercase">
+          <button type="reset" onClick={handleReset} className="btn bg-pink-600 btn-sm text-white uppercase">
             reset
           </button>
         </div>

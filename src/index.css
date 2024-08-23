@@ -8,9 +8,17 @@
     margin: 0px auto!important;
 }
 
-@media screen and (max-width: 992px){
+@media screen and (max-width: 1200px){
     .container{
         max-width: 80%!important;
+        width: 100%!important;
+        margin: 0px auto!important;
+    }
+}
+
+@media screen and (max-width: 992px){
+    .container{
+        max-width: 85%!important;
         width: 100%!important;
         margin: 0px auto!important;
     }
