@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Card from "./components/Card";
 import { createContext } from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
@@ -23,7 +22,8 @@ function App() {
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
   );
-
+  const [data, setData] = useState([]);
+  
   useEffect(() => {
     if (localStorage.getItem("user")) {
       setUser(JSON.parse(localStorage.getItem("user")));
@@ -37,6 +37,12 @@ function App() {
     } else {
       document.querySelector("html").setAttribute("data-theme", theme);
     }
+
+    fetch(`https://strapi-store-server.onrender.com/api/products?featured=true`)
+      .then((resp) => resp.json())
+      .then((data) => {
+        setData(data);
+      });
   }, []);
 
   useEffect(() => {
@@ -55,7 +61,7 @@ function App() {
                 path="/"
                 element={
                   <MainLayout theme={{ theme, setTheme }}>
-                    <Home></Home>
+                    <Home data={data}></Home>
                   </MainLayout>
                 }
               ></Route>

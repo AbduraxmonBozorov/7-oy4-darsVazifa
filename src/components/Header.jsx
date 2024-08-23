@@ -8,14 +8,11 @@ function Header() {
   const theme=useContext(ThemeContext);
 
   function handleTheme(event) {
-    if (event.target.checked == true) {
-      theme.setTheme("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      theme.setTheme("light");
-      localStorage.setItem("theme", "light");
-    }
+    const themeType = event.target.checked ? "dark" : "light";
+    theme.setTheme(themeType);
+    localStorage.setItem("theme", themeType);
   }
+
 
   return (
     <div>
@@ -54,7 +51,7 @@ function Header() {
 
       <div className="header-main">
         <div className=" bg-base-200">
-          <div className="navbar container mx-auto border border-red-500">
+          <div className="navbar container mx-auto">
             <div className="navbar-start">
               <div className="dropdown">
                 <div
@@ -102,16 +99,16 @@ function Header() {
             <div className="navbar-center hidden lg:flex">
               <ul className="menu menu-horizontal px-1">
                 <li>
-                  <Link className="active">Home</Link>
+                  <NavLink to="/">Home</NavLink>
                 </li>
                 <li>
-                  <Link to="/about">About</Link>
+                  <NavLink to="/about">About</NavLink>
                 </li>
                 <li>
-                  <Link to="/products">Products</Link>
+                  <NavLink to="/products">Products</NavLink>
                 </li>
                 <li>
-                  <Link to="/cart">Cart</Link>
+                  <NavLink to="/cart">Cart</NavLink>
                 </li>
                 {token.token && (
                   <>
@@ -119,7 +116,7 @@ function Header() {
                       <NavLink to="/checkout">Checkout</NavLink>
                     </li>
                     <li>
-                      <Link to="/orders">Orders</Link>
+                      <NavLink to="/orders">Orders</NavLink>
                     </li>
                   </>
                 )}

@@ -1,5 +1,6 @@
 import React from 'react'
 import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 function MainLayout({children, theme}) {
  
@@ -8,6 +9,7 @@ function MainLayout({children, theme}) {
     <div>
       <Header theme={theme}></Header>
       {children}
+      <Footer></Footer>
     </div>
   )
 }
