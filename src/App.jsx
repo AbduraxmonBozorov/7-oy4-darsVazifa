@@ -11,6 +11,7 @@ import ErrorPage from "./pages/ErrorPage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import MainLayout from "./layouts/MainLayout";
+import Detailes from "./pages/Detailes";
 
 export const TokenContext = createContext("");
 export const UserContext = createContext("");
@@ -23,7 +24,7 @@ function App() {
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
   );
   const [data, setData] = useState([]);
-  
+
   useEffect(() => {
     if (localStorage.getItem("user")) {
       setUser(JSON.parse(localStorage.getItem("user")));
@@ -78,6 +79,14 @@ function App() {
                 element={
                   <MainLayout theme={{ theme, setTheme }}>
                     <Products></Products>
+                  </MainLayout>
+                }
+              ></Route>
+              <Route
+                path="/products/:id"
+                element={
+                  <MainLayout theme={{ theme, setTheme }}>
+                    <Detailes />
                   </MainLayout>
                 }
               ></Route>
