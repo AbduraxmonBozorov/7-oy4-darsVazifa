@@ -7,6 +7,11 @@ function Home({ data }) {
     return;
   }
 
+  function handleCard(event) {
+    let productId = event.currentTarget.getAttribute("data-id");
+    navigate(`/products/id=${productId}`);
+  }
+
   return (
     <div>
       <div className="container mx-auto">
@@ -48,7 +53,7 @@ function Home({ data }) {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
             {data.data.map((product, index) => (
-              <div key={index} data-id={product.id} className="bg-white cursor-pointer hover:shadow-lg transition p-4 rounded-lg shadow-md">
+              <div onClick={handleCard} key={index} data-id={product.id} className="bg-white cursor-pointer hover:shadow-lg transition p-4 rounded-lg shadow-md">
                 <img
                   src={product.attributes.image}
                   alt={`Product ${index}`}

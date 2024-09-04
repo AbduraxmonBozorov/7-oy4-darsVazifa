@@ -1,17 +1,32 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ThemeContext, TokenContext, UserContext } from "../App";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 function Header() {
   const token = useContext(TokenContext);
   const user = useContext(UserContext);
   const theme=useContext(ThemeContext);
+  const [cartCount, setCartCount] = useState(0);
+  const navigate=useNavigate();
 
   function handleTheme(event) {
     const themeType = event.target.checked ? "dark" : "light";
     theme.setTheme(themeType);
     localStorage.setItem("theme", themeType);
   }
+  
+
+  useEffect(()=>{
+    if(localStorage.getItem("products")){
+      let products=JSON.parse(localStorage.getItem("products"));
+      setCartCount(products.length);
+    }
+  }, [])
+
+  function handleCart(){
+    navigate("/cart");
+  }
+
 
 
   return (
@@ -150,7 +165,7 @@ function Header() {
                   <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
                 </svg>
               </label>
-              <div className="indicator">
+              <div className="indicator cursor-pointer" onClick={handleCart}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-8 w-8"
@@ -165,7 +180,7 @@ function Header() {
                     d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                   />
                 </svg>
-                <span className="badge badge-sm indicator-item bg-primary text-white px-2 border-none">8</span>
+                <span className="badge badge-sm indicator-item bg-primary text-white px-2 border-none">{cartCount}</span>
               </div>
             </div>
           </div>
